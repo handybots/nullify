@@ -59,4 +59,6 @@ gopkg.in/go-playground/assert.v1 v1.2.1/go.mod h1:9RXL0bg/zibRAgZUYszZSwO/z8Y/a8
 gopkg.in/go-playground/validator.v9 v9.30.0/go.mod h1:+c9/zcJMFNgbLvly1L1V+PpxWdVbfP1avr/N00E2vyQ=
 gopkg.in/tucnak/telebot.v3 v3.0.0-20201029184642-0b46db3041f4 h1:uFzO/NZQJRgSE0WBKSAPthe5hunrvxdt1sbXrotkfc4=
 gopkg.in/tucnak/telebot.v3 v3.0.0-20201029184642-0b46db3041f4/go.mod h1:rQkLEeZ6z+UenbjlO1GjW24ZIZ6yJWqv92jcXpGpiR8=
+gopkg.in/tucnak/telebot.v3 v3.0.0-20201102144950-309b5be3170f h1:j9Qowchgt3RjZivYYgtLLBXXj/yCru1QnqjwIEIWXwk=
+gopkg.in/tucnak/telebot.v3 v3.0.0-20201102144950-309b5be3170f/go.mod h1:rQkLEeZ6z+UenbjlO1GjW24ZIZ6yJWqv92jcXpGpiR8=
 gopkg.in/yaml.v2 v2.2.2/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=

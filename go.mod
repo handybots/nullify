@@ -10,5 +10,5 @@ require (
 	github.com/konsorten/go-windows-terminal-sequences v1.0.3 // indirect
 	github.com/sirupsen/logrus v1.7.0
 	golang.org/x/sys v0.0.0-20201101102859-da207088b7d1 // indirect
-	gopkg.in/tucnak/telebot.v3 v3.0.0-20201029184642-0b46db3041f4
+	gopkg.in/tucnak/telebot.v3 v3.0.0-20201102144950-309b5be3170f
 )

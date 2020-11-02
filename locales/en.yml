@@ -5,13 +5,27 @@ start: |-
   View created links - /my
 
 my: |-
-  Your link:
+  Your link:    
   {{range $i, $link := .}}
   <b>{{inc $i}}.</b> <a href="{{config "domain"}}/{{$link.Link}}">{{$link.Link}}</a>
   👁 {{format $link.Conversion}} 👤 {{format $link.ConversionUnique}}
   🔗 {{host $link.SourceLink}}
   {{end}}
+  Delete link:
+
+my_empty: |-
+  Empty!
+  To create a link enter /create
 
 link: |-
   Please specify the link you want to transform. It must contain http or https.
   Example: https://google.com
+
+delete_link: |-
+  Do you really want to delete the link {{.}}?
+
+delete_link_btn: |-
+  {{.}}
+
+where_link: |-
+  Admit. Where did you get this link? 🤔

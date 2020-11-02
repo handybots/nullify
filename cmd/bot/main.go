@@ -47,7 +47,7 @@ func main() {
 	// }
 
 	go func() {
-		srv := server.New(b.Me.Username, ":8050", db)
+		srv := server.New(b.Me.Username, "127.0.0.1:8050", db)
 		if err := srv.Listen(); err != nil {
 			logrus.Fatalln(err)
 		}
@@ -74,7 +74,9 @@ func main() {
 	b.Handle("/my", h.OnLinkList)
 
 	b.Handle(tele.OnText, h.OnText)
-	b.Handle(lt.Button("lang"), h.OnLang)
+	b.Handle(lt.Callback("lang"), h.OnLang)
+	b.Handle(lt.Callback("link"), h.OnDeleteLink)
+	b.Handle(lt.Callback("link_delete"), h.OnDeleteLinkConfirm)
 
 	b.Start()
 }
