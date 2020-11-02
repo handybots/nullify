@@ -1,6 +1,7 @@
 package storage
 
 import (
+	"strings"
 	"time"
 
 	"github.com/jmoiron/sqlx"
@@ -8,8 +9,8 @@ import (
 
 type (
 	LinksStorage interface {
-		Create(link Link) error
-		ByUserID(id int) ([]Link, error)
+		Create(link Link) (Link, error)
+		ByUserID(chat Chat) ([]Link, error)
 	}
 
 	Links struct {
@@ -17,24 +18,41 @@ type (
 	}
 
 	Link struct {
-		ID               int64     `db:"id" sq:"chat_id,omitempty"`
-		UserID           int       `sq:"user_id"`
-		CreatedAt        time.Time `sq:"created_at,omitempty"`
-		SourceLink       string    `sq:"source_link"`
-		Link             string    `sq:"link"`
-		Conversion       int       `sq:"conversion"`
-		ConversionUnique int       `sq:"conversion_unique"`
+		CreatedAt time.Time `sq:"created_at,omitempty"`
+		ID        int64     `db:"id" sq:"id,omitempty"`
+		UserID    int       `sq:"user_id,omitempty"`
+		URL       string    `sq:"url,omitempty"`
+		Deleted   bool      `sq:"deleted,omitempty"`
 	}
 )
 
-func (db *Links) Create(link Link) error {
-	const q = `INSERT INTO links (user_id, source_link, link) VALUES (?, ?, ?)`
-	_, err := db.Exec(q, link.UserID, link.SourceLink, link.Link)
-	return err
+// String returns generated zero-width characters chain by the ID seed.
+func (l Link) String() string {
+	var b strings.Builder
+	b.Grow(64)
+	for i := 0; i != 64; i++ {
+		if l.ID&(1<<i) != 0 {
+			b.WriteString("\u200c")
+		} else {
+			b.WriteString("\u200d")
+		}
+	}
+	return b.String()
 }
 
-func (db *Links) ByUserID(id int) ([]Link, error) {
-	var links []Link
+func (db *Links) Create(link Link) (Link, error) {
+	const q = `INSERT INTO links (user_id, url) VALUES (?, ?)`
+
+	r, err := db.Exec(q, link.UserID, link.URL)
+	if err != nil {
+		return link, err
+	}
+
+	link.ID, err = r.LastInsertId()
+	return link, err
+}
+
+func (db *Links) ByUserID(chat Chat) (links []Link, _ error) {
 	const q = `SELECT * FROM links WHERE user_id = ? LIMIT 5`
-	return links, db.Select(&links, q, id)
+	return links, db.Select(&links, q, chat.Recipient())
 }

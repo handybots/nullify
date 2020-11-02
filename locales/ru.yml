@@ -8,12 +8,11 @@ start: |-
     <a href="https://t.me/handybots">Красивые Боты</a> — канал о красивых ботах в Телеграм
 
 my: |-
-  Ваши ссылки:
-  {{range $i, $link := .}}
-  <b>{{inc $i}}.</b> <a href="{{config "domain"}}/{{$link.Link}}">{{$link.Link}}</a>
-  👁 {{format $link.Conversion}} 👤 {{format $link.ConversionUnique}}
-  🔗 {{link $link.SourceLink}}
-  {{end}}
+  {{ range $i, $link := . }}
+  <b>{{inc $i}}.</b> {{config "domain"}}/{{$link.String}}
+  👁 0 👤 0
+  🔗 {{host $link.URL}}
+  {{ end }}
 
 link: |-
   Пожалуйста, укажите ссылку, которую нужно преобразить. Она должна содержать в себе http либо https

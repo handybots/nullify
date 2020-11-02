@@ -8,10 +8,9 @@ import (
 
 func New(c Handler) handler {
 	return handler{
-		lt:     c.Layout,
-		b:      c.Bot,
-		db:     c.DB,
-		domain: c.Domain,
+		lt: c.Layout,
+		b:  c.Bot,
+		db: c.DB,
 	}
 }
 
@@ -20,12 +19,10 @@ type (
 		Layout *layout.Layout
 		Bot    *tele.Bot
 		DB     *storage.DB
-		Domain string
 	}
 	handler struct {
-		lt     *layout.Layout
-		b      *tele.Bot
-		db     *storage.DB
-		domain string
+		lt *layout.Layout
+		b  *tele.Bot
+		db *storage.DB
 	}
 )

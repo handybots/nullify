@@ -16,23 +16,25 @@ func (h handler) onCreateLinkReply(c tele.Context) error {
 	if err != nil || u.Scheme == "" || (u.Scheme != "http" && u.Scheme != "https") {
 		return c.Send(h.lt.Text(c, "link"), tele.ForceReply)
 	}
-	l := generateLink()
 
-	if err := h.db.Links.Create(storage.Link{
-		UserID:     c.Message().Sender.ID,
-		SourceLink: c.Message().Text,
-		Link:       l,
-	}); err != nil {
-		return err
-	}
-
-	return c.Reply(h.domain + l)
-}
-
-func (h handler) OnLinkList(c tele.Context) error {
-	links, err := h.db.Links.ByUserID(c.Message().Sender.ID)
+	link, err := h.db.Links.Create(storage.Link{
+		UserID: c.Message().Sender.ID,
+		URL:    c.Message().Text,
+	})
 	if err != nil {
 		return err
 	}
-	return c.Send(h.lt.Text(c, "my", links), tele.NoPreview)
+
+	return c.Reply(h.lt.String("domain") + "/" + link.String())
+}
+
+func (h handler) OnLinkList(c tele.Context) error {
+	links, err := h.db.Links.ByUserID(c.Sender())
+	if err != nil {
+		return err
+	}
+
+	return c.Send(
+		h.lt.Text(c, "my", links),
+		tele.NoPreview)
 }

@@ -3,13 +3,13 @@ start: |-
 
   Create magic link - /create
   View created links - /my
-  
+
 my: |-
   Your link:
   {{range $i, $link := .}}
   <b>{{inc $i}}.</b> <a href="{{config "domain"}}/{{$link.Link}}">{{$link.Link}}</a>
   👁 {{format $link.Conversion}} 👤 {{format $link.ConversionUnique}}
-  🔗 {{link $link.SourceLink}}
+  🔗 {{host $link.SourceLink}}
   {{end}}
 
 link: |-

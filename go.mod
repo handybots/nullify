@@ -3,7 +3,7 @@ module github.com/handybots/inzerobot
 go 1.15
 
 require (
-	github.com/demget/clickrus v1.3.4-0.20201030145135-fd12d66c8589 // indirect
+	github.com/demget/clickrus v1.3.4-0.20201030145135-fd12d66c8589
 	github.com/fatih/structs v1.1.0
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/jmoiron/sqlx v1.2.0

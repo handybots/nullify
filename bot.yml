@@ -1,22 +1,22 @@
 settings:
-    token_env: token
-    parse_mode: html
+  token_env: token
+  parse_mode: html
 
 config:
-    domain: 127.0.0.1
+  domain: 127.0.0.1
 
 buttons:
-    lang: &lang
-        unique: lang
-    lang_ru:
-        <<: *lang
-        callback_data: ru
-        text: 🇷🇺
-    lang_en:
-        <<: *lang
-        callback_data: en
-        text: 🇬🇧
+  lang: &lang
+    unique: lang
+  lang_ru:
+    <<: *lang
+    callback_data: ru
+    text: 🇷🇺
+  lang_en:
+    <<: *lang
+    callback_data: en
+    text: 🇬🇧
 
 markups:
-    lang:
-        - [lang_ru, lang_en]
+  lang:
+    - [lang_ru, lang_en]

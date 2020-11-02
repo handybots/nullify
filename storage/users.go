@@ -26,6 +26,7 @@ type (
 		CreatedAt time.Time `sq:"created_at,omitempty"`
 		ID        int64     `db:"chat_id" sq:"chat_id,omitempty"`
 		Lang      string    `sq:"lang,omitempty"`
+		Blocked   bool      `sq:"blocked,omitempty"`
 	}
 )
 
