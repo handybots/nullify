@@ -19,7 +19,7 @@ create table links (
 
 create table views (
     created_at    timestamp       not null default now(),
-    id            serial          not null primary key auto_increment,
+    id            bigint(64)      not null primary key auto_increment,
     link_id       bigint(64)      not null default 0 references links (id),
     ip            varchar(16)     not null default '',
     user_agent    varchar(256)    not null default '',
