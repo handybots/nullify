@@ -48,7 +48,10 @@ func (h handler) OnLang(c tele.Context) error {
 		h.lt.SetLocale(c, lang)
 	}
 
-	return c.Edit(
-		h.lt.Text(c, "start"),
-		h.lt.Markup(c, "lang"))
+	msg := c.Message()
+	h.b.Delete(msg) // "start" message
+	msg.ID++
+	h.b.Delete(msg) // "send" message
+
+	return h.OnStart(c)
 }

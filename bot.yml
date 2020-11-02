@@ -7,17 +7,17 @@ config:
   limit: 5
 
 buttons:
-  my: 'Мои ссылки'
+  my: '{{ text `btn_my` }}'
 
   lang: &lang
     unique: lang
   lang_ru:
     <<: *lang
-    callback_data: ru
+    callback_data: 'ru'
     text: 🇷🇺
   lang_en:
     <<: *lang
-    callback_data: en
+    callback_data: 'en'
     text: 🇬🇧
 
   link:

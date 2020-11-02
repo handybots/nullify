@@ -1,38 +1,41 @@
 start: |-
-  <b>Привет! Это 🔗 @nullifybot!</b>
+  <b>Welcome! I'm 🔗 @nullifybot!</b>
 
-  Я создам тебе <i>магическую ссылку</i>. Никто не узнает что там, пока не откроет её.
+  I can create you a <i>magic link</i>. Nobody knows what's inside until they open it.
 
-  Убедись сам: {{ config "domain" }}/{{.}}✨
+  Check for yourself: {{ config "domain" }}/{{.}}✨
 
 send: |-
-  😉 Отправь мне любую ссылку, а я спрячу её от любопытных глаз.
+  😉 Send me any link, and I will hide it from those curious eyes.
 
 created: |-
-  🔗 Твоя ссылка: {{ config "domain" }}/{{.}}
+  🔗 Your link: {{ config "domain" }}/{{.}}
 
 bad: |-
-  🧐 Не могу распознать адрес...
-  Пример ссылки: google.com
+  🧐 I can't recognize the address...
+  Valid example: google.com
 
 limit: |-
-  😕 К сожалению, свободных ссылок не осталось!
+  😕 There is no available links left for you!
 
 whence: |-
-  Признавайся. Откуда у тебя эта ссылка? 🤔
+  Where did you get this link from? 🤔
 
 my: |-
   {{ range . }}
   <b>{{.Number}}.</b> {{ config "domain" }}/{{.String}}
   🔀 <a href="{{.URL}}">{{ host .URL }}</a>
-  👁 {{.Views}} переходов
-  👤 {{.Unique}} уникальных
+  👁 {{.Views}} views
+  👤 {{.Unique}} unique
   {{end}}
 
 my_link: |-
-  ⚠ <b>Уверен, что хочешь удалить выбранную ссылку?</b>
+  ⚠ <b>Are you sure you want to delete this link?</b>
 
   <b>{{.Number}}.</b> {{ config "domain" }}/{{.String}}
   🔀 <a href="{{.URL}}">{{ host .URL }}</a>
-  👁 {{.Views}} переходов
-  👤 {{.Unique}} уникальных
+  👁 {{.Views}} views
+  👤 {{.Unique}} unique
+
+
+btn_my: My links
