@@ -21,8 +21,13 @@ func (h handler) OnStart(c tele.Context) error {
 		}
 	}
 
+	link, err := h.db.Links.ByID(1)
+	if err != nil {
+		return err
+	}
+
 	return c.Send(
-		h.lt.Text(c, "start"),
+		h.lt.Text(c, "start", link.String()),
 		h.lt.Markup(c, "lang"),
 		tele.NoPreview)
 }

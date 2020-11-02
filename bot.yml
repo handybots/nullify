@@ -3,7 +3,7 @@ settings:
   parse_mode: html
 
 config:
-  domain: 127.0.0.1:8050
+  domain: nullify.cc
 
 buttons:
   lang: &lang
@@ -32,7 +32,6 @@ buttons:
     unique: link
     callback_data: '{{.ID}}'
     text: '{{.Number}}'
-    
 
 markups:
   lang:
