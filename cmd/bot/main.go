@@ -46,7 +46,7 @@ func main() {
 	}
 
 	go func() {
-		srv := server.New(b.Me.Username, "127.0.0.1:8050", db)
+		srv := server.New(b.Me.Username, lt.String("addr"), db)
 		if err := srv.Listen(); err != nil {
 			logrus.Fatalln(err)
 		}
