@@ -1,34 +1,38 @@
 start: |-
-  Hi!
+  <b>Привет! Это 🔗 @nullifybot!</b>
 
-  Create magic link - /create
-  View created links - /my
+  Я создам тебе <i>магическую ссылку</i>. Никто не узнает что там, пока не откроет её.
+
+  Убедись сам: {{ config "domain" }}/{{.}}✨
+
+send: |-
+  😉 Отправь мне любую ссылку, а я спрячу её от любопытных глаз.
+
+created: |-
+  🔗 Твоя ссылка: {{ config "domain" }}/{{.}}
+
+bad: |-
+  🧐 Не могу распознать адрес...
+  Пример ссылки: google.com
+
+limit: |-
+  😕 К сожалению, свободных ссылок не осталось!
+
+whence: |-
+  Признавайся. Откуда у тебя эта ссылка? 🤔
 
 my: |-
-  Your links:     
-  {{ range $i, $link := . }}
-  <b>{{inc $i}}.</b> <a href="{{config "domain"}}/{{$link.String}}">{{config "domain"}}/</a>
-  👁 0 👤 0
-  🔗<a href="{{$link.URL}}">{{host $link.URL}}</a>
-  {{ end }}
-  Delete link:
+  {{ range . }}
+  <b>{{.Number}}.</b> {{ config "domain" }}/{{.String}}
+  🔀 <a href="{{.URL}}">{{ host .URL }}</a>
+  👁 {{.Views}} переходов
+  👤 {{.Unique}} уникальных
+  {{end}}
 
-my_empty: |-
-  Empty!
-  To create a link enter /create
+my_link: |-
+  ⚠ <b>Уверен, что хочешь удалить выбранную ссылку?</b>
 
-link: |-
-  Please specify the link you want to transform. It must contain http or https.
-  Example: https://google.com
-
-link_limit: |-
-  You have a link limit. Please delete the unnecessary link using the /my command 
-
-delete_link: |-
-  Do you really want to delete the link {{.}}?
-
-delete_link_btn: |-
-  {{.}}
-
-where_link: |-
-  Admit. Where did you get this link? 🤔
+  <b>{{.Number}}.</b> {{ config "domain" }}/{{.String}}
+  🔀 <a href="{{.URL}}">{{ host .URL }}</a>
+  👁 {{.Views}} переходов
+  👤 {{.Unique}} уникальных

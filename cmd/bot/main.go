@@ -19,7 +19,6 @@ import (
 func main() {
 	logrus.SetLevel(log.Lshortfile)
 
-	layout.AddFunc("inc", func(i int) int { return i + 1 })
 	layout.AddFunc("format", formatN)
 	layout.AddFunc("host", host)
 
@@ -70,13 +69,11 @@ func main() {
 
 	// Handlers
 	b.Handle("/start", h.OnStart)
-	b.Handle("/create", h.OnCreateLink)
-	b.Handle("/my", h.OnLinkList)
-
 	b.Handle(tele.OnText, h.OnText)
 	b.Handle(lt.Callback("lang"), h.OnLang)
-	b.Handle(lt.Callback("link"), h.OnDeleteLink)
-	b.Handle(lt.Callback("link_delete"), h.OnDeleteLinkConfirm)
+	b.Handle(lt.Callback("my"), h.OnMy)
+	b.Handle(lt.Callback("link"), h.OnLink)
+	b.Handle(lt.Callback("link_delete"), h.OnLinkDelete)
 
 	b.Start()
 }

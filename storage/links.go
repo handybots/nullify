@@ -17,9 +17,10 @@ type (
 		Create(link Link) (Link, error)
 		ByID(id int64) (Link, error)
 		ByString(s string) (Link, error)
-		ByUserID(chat Chat) ([]Link, error)
-		SetDeleted(link Link) error
-		CountByUserID(chat Chat) (int, error)
+		SetDeleted(id int64, deleted bool) error
+		ByUser(user Chat) ([]Link, error)
+		CountByUser(user Chat) (int, error)
+		ExistsForUser(id int64, user Chat) (bool, error)
 	}
 
 	Links struct {
@@ -62,7 +63,7 @@ func (db *Links) Create(link Link) (Link, error) {
 }
 
 func (db *Links) ByID(id int64) (link Link, _ error) {
-	const q = `SELECT * FROM links WHERE id = ?`
+	const q = `SELECT * FROM links WHERE id = ? AND deleted = false`
 	return link, db.Get(&link, q, id)
 }
 
@@ -78,18 +79,23 @@ func (db *Links) ByString(s string) (link Link, _ error) {
 	return db.ByID(id)
 }
 
-func (db *Links) ByUserID(chat Chat) (links []Link, _ error) {
-	const q = `SELECT * FROM links WHERE user_id = ? AND deleted = false`
-	return links, db.Select(&links, q, chat.Recipient())
-}
-
-func (db *Links) SetDeleted(link Link) error {
+func (db *Links) SetDeleted(id int64, deleted bool) error {
 	const q = "UPDATE links SET deleted = ? WHERE id = ?"
-	_, err := db.Exec(q, link.Deleted, link.ID)
+	_, err := db.Exec(q, deleted, id)
 	return err
 }
 
-func (db *Links) CountByUserID(chat Chat) (number int, _ error) {
-	const q = `SELECT COUNT(1) FROM links WHERE user_id = ? AND deleted = false`
-	return number, db.Get(&number, q, chat.Recipient())
+func (db *Links) ByUser(user Chat) (links []Link, _ error) {
+	const q = `SELECT * FROM links WHERE user_id = ? AND deleted = false`
+	return links, db.Select(&links, q, user.Recipient())
+}
+
+func (db *Links) CountByUser(user Chat) (number int, _ error) {
+	const q = `SELECT COUNT(*) FROM links WHERE user_id = ? AND deleted = false`
+	return number, db.Get(&number, q, user.Recipient())
+}
+
+func (db *Links) ExistsForUser(id int64, user Chat) (has bool, _ error) {
+	const q = `SELECT EXISTS(SELECT 1 FROM links WHERE id=? AND user_id=? AND deleted=false)`
+	return has, db.Get(&has, q, id, user.Recipient())
 }

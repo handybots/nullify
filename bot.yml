@@ -4,8 +4,11 @@ settings:
 
 config:
   domain: nullify.cc
+  limit: 5
 
 buttons:
+  my: 'Мои ссылки'
+
   lang: &lang
     unique: lang
   lang_ru:
@@ -17,24 +20,26 @@ buttons:
     callback_data: en
     text: 🇬🇧
 
+  link:
+    unique: my_link
+    callback_data: '{{.Number}}|{{.ID}}'
+    text: '{{.Number}}'
+
   link_delete: &link_delete
     unique: link_delete
   link_delete_confirm:
     <<: *link_delete
-    callback_data: 1
+    callback_data: '{{.}}'
     text: ✅
   link_delete_cancel:
     <<: *link_delete
     callback_data: -1
     text: ❌
 
-  link:
-    unique: link
-    callback_data: '{{.ID}}'
-    text: '{{.Number}}'
-
 markups:
   lang:
     - [lang_ru, lang_en]
-  link_delete:
+  menu:
+    - [my]
+  delete:
     - [link_delete_confirm, link_delete_cancel]

@@ -26,3 +26,9 @@ type (
 		db *storage.DB
 	}
 )
+
+type Link struct {
+	storage.Link
+	storage.ViewStats
+	Number int
+}

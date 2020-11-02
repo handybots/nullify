@@ -26,6 +26,10 @@ func (h handler) OnStart(c tele.Context) error {
 		return err
 	}
 
+	defer c.Send(
+		h.lt.Text(c, "send"),
+		h.lt.Markup(c, "menu"))
+
 	return c.Send(
 		h.lt.Text(c, "start", link.String()),
 		h.lt.Markup(c, "lang"),
