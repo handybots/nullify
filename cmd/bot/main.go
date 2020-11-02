@@ -12,6 +12,7 @@ import (
 	"gopkg.in/tucnak/telebot.v3/middleware"
 
 	"github.com/handybots/inzerobot/handler"
+	"github.com/handybots/inzerobot/server"
 	"github.com/handybots/inzerobot/storage"
 )
 
@@ -33,7 +34,6 @@ func main() {
 	}
 
 	db, err := storage.Open(os.Getenv("MYSQL_URL"))
-	// db, err := storage.Open("tester:test123@/magiclinkbot?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -45,6 +45,13 @@ func main() {
 	// if err != nil {
 	// 	log.Fatal(err)
 	// }
+
+	go func() {
+		serv := server.NewServer(":8050", db)
+		if err := serv.Listen(); err != nil {
+			logrus.Fatalln(err)
+		}
+	}()
 
 	logger := logrus.New()
 	logger.SetOutput(os.Stdout)

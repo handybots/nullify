@@ -7,7 +7,7 @@ require (
 	github.com/fatih/structs v1.1.0
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/jmoiron/sqlx v1.2.0
-	github.com/pkg/errors v0.9.1 // indirect
+	github.com/konsorten/go-windows-terminal-sequences v1.0.3 // indirect
 	github.com/sirupsen/logrus v1.7.0
 	golang.org/x/sys v0.0.0-20201101102859-da207088b7d1 // indirect
 	gopkg.in/tucnak/telebot.v3 v3.0.0-20201029184642-0b46db3041f4
