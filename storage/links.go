@@ -18,6 +18,7 @@ type (
 		ByID(id int64) (Link, error)
 		ByString(s string) (Link, error)
 		ByUserID(chat Chat) ([]Link, error)
+		SetDeleted(link Link) error
 	}
 
 	Links struct {
@@ -77,6 +78,12 @@ func (db *Links) ByString(s string) (link Link, _ error) {
 }
 
 func (db *Links) ByUserID(chat Chat) (links []Link, _ error) {
-	const q = `SELECT * FROM links WHERE user_id = ? LIMIT 5`
+	const q = `SELECT * FROM links WHERE user_id = ? AND deleted = false LIMIT 5`
 	return links, db.Select(&links, q, chat.Recipient())
+}
+
+func (db *Links) SetDeleted(link Link) error {
+	const q = "UPDATE links SET deleted = ? WHERE id = ?"
+	_, err := db.Exec(q, link.Deleted, link.ID)
+	return err
 }

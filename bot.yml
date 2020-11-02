@@ -3,7 +3,7 @@ settings:
   parse_mode: html
 
 config:
-  domain: localhost:8050
+  domain: 127.0.0.1:8050
 
 buttons:
   lang: &lang
@@ -17,6 +17,25 @@ buttons:
     callback_data: en
     text: 🇬🇧
 
+  link_delete: &link_delete
+    unique: link_delete
+  link_delete_confirm:
+    <<: *link_delete
+    callback_data: 1
+    text: ✅
+  link_delete_cancel:
+    <<: *link_delete
+    callback_data: -1
+    text: ❌
+
+  link:
+    unique: link
+    callback_data: '{{.ID}}'
+    text: '{{.Number}}'
+    
+
 markups:
   lang:
     - [lang_ru, lang_en]
+  link_delete:
+    - [link_delete_confirm, link_delete_cancel]

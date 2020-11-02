@@ -74,7 +74,9 @@ func main() {
 	b.Handle("/my", h.OnLinkList)
 
 	b.Handle(tele.OnText, h.OnText)
-	b.Handle(lt.Button("lang"), h.OnLang)
+	b.Handle(lt.Callback("lang"), h.OnLang)
+	b.Handle(lt.Callback("link"), h.OnDeleteLink)
+	b.Handle(lt.Callback("link_delete"), h.OnDeleteLinkConfirm)
 
 	b.Start()
 }
