@@ -5,12 +5,12 @@ start: |-
   View created links - /my
 
 my: |-
-  Your link:    
-  {{range $i, $link := .}}
-  <b>{{inc $i}}.</b> <a href="{{config "domain"}}/{{$link.Link}}">{{$link.Link}}</a>
-  👁 {{format $link.Conversion}} 👤 {{format $link.ConversionUnique}}
-  🔗 {{host $link.SourceLink}}
-  {{end}}
+  Your links:     
+  {{ range $i, $link := . }}
+  <b>{{inc $i}}.</b> <a href="{{config "domain"}}/{{$link.String}}">{{config "domain"}}/</a>
+  👁 0 👤 0
+  🔗<a href="{{$link.URL}}">{{host $link.URL}}</a>
+  {{ end }}
   Delete link:
 
 my_empty: |-
