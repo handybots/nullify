@@ -26,6 +26,17 @@ type (
 	}
 )
 
+func LinkFromString(s string) int64 {
+	var n, b int64 = 0, 1
+	for _, r := range []rune(s) {
+		if r == '\u200c' {
+			n += b
+		}
+		b = b << 1
+	}
+	return n
+}
+
 // String returns generated zero-width characters chain by the ID seed.
 func (l Link) String() string {
 	var b strings.Builder
