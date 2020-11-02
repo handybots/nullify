@@ -15,7 +15,6 @@ const (
 type (
 	LinksStorage interface {
 		Create(link Link) (Link, error)
-		Exists(link string) (bool, error)
 		ByID(id int64) (Link, error)
 		ByString(s string) (Link, error)
 		ByUserID(chat Chat) ([]Link, error)
@@ -58,11 +57,6 @@ func (db *Links) Create(link Link) (Link, error) {
 
 	link.ID, err = r.LastInsertId()
 	return link, err
-}
-
-func (db *Links) Exists(link string) (has bool, _ error) {
-	const q = `SELECT EXISTS(SELECT 1 FROM links WHERE link=?)`
-	return has, db.Get(&has, q, link)
 }
 
 func (db *Links) ByID(id int64) (link Link, _ error) {
