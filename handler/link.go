@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"net/url"
 	"strconv"
 
@@ -8,11 +9,33 @@ import (
 	tele "gopkg.in/tucnak/telebot.v3"
 )
 
+const limitLinks = 5
+
+func (h handler) limitLinks(c tele.Context) error {
+	count, err := h.db.Links.CountByUserID(c.Chat())
+	if err != nil {
+		return err
+	}
+	if count >= limitLinks {
+		c.Send(h.lt.Text(c, "link_limit"))
+		return fmt.Errorf("create links: limit")
+	}
+
+	return nil
+}
+
 func (h handler) OnCreateLink(c tele.Context) error {
+	if err := h.limitLinks(c); err != nil {
+		return err
+	}
 	return c.Send(h.lt.Text(c, "link"), tele.ForceReply)
 }
 
 func (h handler) onCreateLinkReply(c tele.Context) error {
+	if err := h.limitLinks(c); err != nil {
+		return err
+	}
+
 	u, err := url.ParseRequestURI(c.Text())
 	if err != nil || u.Scheme == "" || (u.Scheme != "http" && u.Scheme != "https") {
 		return c.Send(h.lt.Text(c, "link"), tele.ForceReply)

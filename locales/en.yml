@@ -21,6 +21,9 @@ link: |-
   Please specify the link you want to transform. It must contain http or https.
   Example: https://google.com
 
+link_limit: |-
+  You have a link limit. Please delete the unnecessary link using the /my command 
+
 delete_link: |-
   Do you really want to delete the link {{.}}?
 
