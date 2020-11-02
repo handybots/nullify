@@ -1,4 +1,4 @@
-module github.com/handybots/inzerobot
+module github.com/handybots/nullifybot
 
 go 1.15
 

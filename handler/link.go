@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/handybots/inzerobot/storage"
+	"github.com/handybots/nullifybot/storage"
 	tele "gopkg.in/tucnak/telebot.v3"
 )
 

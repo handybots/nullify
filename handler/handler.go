@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/handybots/inzerobot/storage"
+	"github.com/handybots/nullifybot/storage"
 	tele "gopkg.in/tucnak/telebot.v3"
 	"gopkg.in/tucnak/telebot.v3/layout"
 )

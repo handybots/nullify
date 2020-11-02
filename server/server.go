@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"unicode/utf8"
 
-	"github.com/handybots/inzerobot/storage"
+	"github.com/handybots/nullifybot/storage"
 )
 
 type Server struct {

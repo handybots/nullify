@@ -11,9 +11,9 @@ import (
 	"gopkg.in/tucnak/telebot.v3/layout"
 	"gopkg.in/tucnak/telebot.v3/middleware"
 
-	"github.com/handybots/inzerobot/handler"
-	"github.com/handybots/inzerobot/server"
-	"github.com/handybots/inzerobot/storage"
+	"github.com/handybots/nullifybot/handler"
+	"github.com/handybots/nullifybot/server"
+	"github.com/handybots/nullifybot/storage"
 )
 
 func main() {
@@ -84,5 +84,5 @@ func main() {
 var clickHouseConfig = clickrus.Config{
 	Addr:    os.Getenv("CLICKHOUSE_URL"),
 	Columns: []string{"event", "user_id"},
-	Table:   "inzerobot.logs",
+	Table:   "nullifybot.logs",
 }
