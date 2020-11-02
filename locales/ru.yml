@@ -9,7 +9,7 @@ start: |-
 
 my: |-
   {{ range $i, $link := . }}
-  <b>{{inc $i}}.</b> {{config "domain"}}/{{$link.String}}
+  <b>{{inc $i}}.</b> <a href="{{config "domain"}}/{{$link.String}}">{{config "domain"}}/</a>
   👁 0 👤 0
   🔗 {{host $link.URL}}
   {{ end }}

@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"net/http"
 	"unicode/utf8"
 
@@ -9,13 +8,15 @@ import (
 )
 
 type Server struct {
+	move string
 	addr string
 	stor *storage.DB
 }
 
-func NewServer(address string, stor *storage.DB) *Server {
+func New(name, addr string, stor *storage.DB) *Server {
 	s := &Server{
-		addr: address,
+		move: "https://t.me/" + name,
+		addr: addr,
 		stor: stor,
 	}
 
@@ -28,22 +29,15 @@ func (s *Server) Listen() error {
 }
 
 func (s *Server) index(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path == "/" {
-		fmt.Fprint(w, "hello")
-		return
-	}
-
 	r.URL.Path = r.URL.Path[1:]
 	if utf8.RuneCountInString(r.URL.Path) != 64 {
-		r.URL.Path = ""
-		http.Redirect(w, r, r.URL.String(), http.StatusPermanentRedirect)
+		http.Redirect(w, r, s.move, http.StatusPermanentRedirect)
 		return
 	}
 
 	link, err := s.stor.Links.ByString(r.URL.Path)
 	if err != nil {
-		r.URL.Path = ""
-		http.Redirect(w, r, r.URL.String(), http.StatusPermanentRedirect)
+		http.Redirect(w, r, s.move, http.StatusPermanentRedirect)
 		return
 	}
 
