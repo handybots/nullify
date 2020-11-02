@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"net/http"
 	"unicode/utf8"
 
@@ -27,6 +28,12 @@ func (s *Server) Listen() error {
 }
 
 func (s *Server) index(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path == "/" {
+		fmt.Fprint(w, "hello")
+		return
+	}
+
+	r.URL.Path = r.URL.Path[1:]
 	if utf8.RuneCountInString(r.URL.Path) != 64 {
 		r.URL.Path = ""
 		http.Redirect(w, r, r.URL.String(), http.StatusPermanentRedirect)
@@ -40,11 +47,12 @@ func (s *Server) index(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	s.stor.Views.Create(storage.View{
+	go s.stor.Views.Create(storage.View{
 		LinkID:    link.ID,
 		IP:        r.RemoteAddr,
 		UserAgent: r.Header.Get("User-Agent"),
 	})
 
+	w.Header().Set("Cache-Control", "no-cache")
 	http.Redirect(w, r, link.URL, http.StatusPermanentRedirect)
 }
