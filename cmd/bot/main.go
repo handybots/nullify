@@ -40,10 +40,10 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// ch, err := clickrus.NewHook(clickHouseConfig)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	ch, err := clickrus.NewHook(clickHouseConfig)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	go func() {
 		srv := server.New(b.Me.Username, "127.0.0.1:8050", db)
@@ -54,7 +54,7 @@ func main() {
 
 	logger := logrus.New()
 	logger.SetOutput(os.Stdout)
-	// logger.AddHook(ch)
+	logger.AddHook(ch)
 
 	h := handler.New(handler.Handler{
 		Layout: lt,
