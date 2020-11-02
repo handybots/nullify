@@ -1,5 +1,5 @@
 settings:
-  token_env: token
+  token_env: TOKEN
   parse_mode: html
 
 config:
