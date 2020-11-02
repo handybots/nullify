@@ -47,7 +47,7 @@ func main() {
 	// }
 
 	go func() {
-		serv := server.NewServer(":8050", db)
+		serv := server.NewServer("127.0.0.1:8050", db)
 		if err := serv.Listen(); err != nil {
 			logrus.Fatalln(err)
 		}
