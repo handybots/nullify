@@ -43,10 +43,18 @@ func (s *Server) index(w http.ResponseWriter, r *http.Request) {
 
 	go s.stor.Views.Create(storage.View{
 		LinkID:    link.ID,
-		IP:        r.RemoteAddr,
+		IP:        s.realIP(r),
 		UserAgent: r.Header.Get("User-Agent"),
 	})
 
 	w.Header().Set("Cache-Control", "no-cache")
 	http.Redirect(w, r, link.URL, http.StatusPermanentRedirect)
+}
+
+func (s *Server) realIP(r *http.Request) string {
+	ip := r.Header.Get("X-Real-IP")
+	if ip != "" {
+		return ip
+	}
+	return r.RemoteAddr
 }
