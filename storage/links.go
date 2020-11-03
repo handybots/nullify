@@ -1,15 +1,10 @@
 package storage
 
 import (
-	"strings"
 	"time"
 
+	"github.com/handybots/nullifybot/linkgen"
 	"github.com/jmoiron/sqlx"
-)
-
-const (
-	zeroWidthRune0 = '\u200c'
-	zeroWidthRune1 = '\u200d'
 )
 
 type (
@@ -36,18 +31,8 @@ type (
 	}
 )
 
-// String returns generated zero-width characters chain by the ID seed.
 func (l Link) String() string {
-	var b strings.Builder
-	b.Grow(64)
-	for i := 0; i != 64; i++ {
-		if l.ID&(1<<i) != 0 {
-			b.WriteRune(zeroWidthRune0)
-		} else {
-			b.WriteRune(zeroWidthRune1)
-		}
-	}
-	return b.String()
+	return linkgen.S(l.ID)
 }
 
 func (db *Links) Create(link Link) (Link, error) {
@@ -68,15 +53,7 @@ func (db *Links) ByID(id int64) (link Link, _ error) {
 }
 
 func (db *Links) ByString(s string) (link Link, _ error) {
-	var id, b int64 = 0, 1
-	for _, r := range []rune(s) {
-		if r == zeroWidthRune0 {
-			id += b
-		}
-		b = b << 1
-	}
-
-	return db.ByID(id)
+	return db.ByID(linkgen.N(s))
 }
 
 func (db *Links) SetDeleted(id int64, deleted bool) error {

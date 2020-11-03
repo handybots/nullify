@@ -3,7 +3,7 @@ settings:
   parse_mode: html
 
 config:
-  addr: ':80'
+  addr: ':8050'
   domain: nullify.cc
   limit: 5
 
