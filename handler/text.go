@@ -18,8 +18,8 @@ func (h handler) OnText(c tele.Context) error {
 		return c.Send(h.lt.Text(c, "limit"))
 	}
 
-	if !h.checkSubscription(c.Sender()) &&
-		count >= limits.Int("default") {
+	if count >= limits.Int("default") &&
+		!h.checkSubscription(c.Sender()) {
 		return c.Send(
 			h.lt.Text(c, "limit"),
 			h.lt.Markup(c, "more"))
