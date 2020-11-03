@@ -1,17 +1,19 @@
 package handler
 
 import (
+	"database/sql"
+
 	tele "gopkg.in/tucnak/telebot.v3"
 )
 
 func (h handler) OnMy(c tele.Context) error {
 	links, err := h.db.Links.ByUser(c.Sender())
-	if err != nil {
+	if err != nil && err != sql.ErrNoRows {
 		return err
 	}
 
 	if len(links) == 0 {
-		return c.Send(h.lt.Text(c, "link"))
+		return c.Send(h.lt.Text(c, "send"))
 	}
 
 	var xlinks []Link

@@ -2,8 +2,10 @@ package server
 
 import (
 	"net/http"
+	"strings"
 	"unicode/utf8"
 
+	"github.com/handybots/nullifybot/linkgen"
 	"github.com/handybots/nullifybot/storage"
 )
 
@@ -29,8 +31,13 @@ func (s *Server) Listen() error {
 }
 
 func (s *Server) index(w http.ResponseWriter, r *http.Request) {
+	if strings.Contains(r.Header.Get("User-Agent"), "TelegramBot") {
+		w.WriteHeader(http.StatusGone)
+		return
+	}
+
 	r.URL.Path = r.URL.Path[1:]
-	if utf8.RuneCountInString(r.URL.Path) != 64 {
+	if utf8.RuneCountInString(r.URL.Path) != linkgen.BucketSize {
 		http.Redirect(w, r, s.move, http.StatusPermanentRedirect)
 		return
 	}

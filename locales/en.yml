@@ -3,13 +3,13 @@ start: |-
 
   I can create you a <i>magic link</i>. Nobody knows what's inside until they open it.
 
-  Check for yourself: {{ config "domain" }}/{{.}}✨
+  Check for yourself: {{ config "host" }}/{{.}} ✨
 
 send: |-
   😉 Send me any link, and I will hide it from those curious eyes.
 
 created: |-
-  🔗 Your link: {{ config "domain" }}/{{.}}
+  🔗 Your link: {{ config "host" }}/{{.}}
 
 bad: |-
   🧐 I can't recognize the address...
@@ -23,7 +23,7 @@ whence: |-
 
 my: |-
   {{ range . }}
-  <b>{{.Number}}.</b> {{ config "domain" }}/{{.String}}
+  <b>{{.Number}}.</b> {{ config "host" }}/{{.String}}
   🔀 <a href="{{.URL}}">{{ host .URL }}</a>
   👁 {{.Views}} views
   👤 {{.Unique}} unique
@@ -32,7 +32,7 @@ my: |-
 my_link: |-
   ⚠ <b>Are you sure you want to delete this link?</b>
 
-  <b>{{.Number}}.</b> {{ config "domain" }}/{{.String}}
+  <b>{{.Number}}.</b> {{ config "host" }}/{{.String}}
   🔀 <a href="{{.URL}}">{{ host .URL }}</a>
   👁 {{.Views}} views
   👤 {{.Unique}} unique

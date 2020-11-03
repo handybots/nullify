@@ -3,7 +3,7 @@ package linkgen
 import "strings"
 
 const (
-	bucketSize     = 24 // 16 777 216
+	BucketSize     = 24 // 16 777 216
 	zeroWidthRune0 = '\u200c'
 	zeroWidthRune1 = '\u200d'
 )
@@ -21,8 +21,8 @@ func N(s string) int64 {
 
 func S(n int64) string {
 	var b strings.Builder
-	b.Grow(bucketSize)
-	for i := 0; i != bucketSize; i++ {
+	b.Grow(BucketSize)
+	for i := 0; i != BucketSize; i++ {
 		if n&(1<<i) != 0 {
 			b.WriteRune(zeroWidthRune0)
 		} else {

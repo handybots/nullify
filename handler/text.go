@@ -43,5 +43,7 @@ func (h handler) OnText(c tele.Context) error {
 		return err
 	}
 
-	return c.Reply(h.lt.Text(c, "created", link.String()))
+	return c.Reply(
+		h.lt.Text(c, "created", link.String()),
+		tele.NoPreview)
 }
