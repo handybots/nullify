@@ -5,7 +5,10 @@ settings:
 config:
   addr: ':8050'
   host: 'https://nullify.cc'
-  limit: 5
+  subscribe: 'handybots'
+  limits:
+    default: 5
+    subscribed: 20
 
 buttons:
   my: '{{ text `btn_my` }}'
@@ -20,6 +23,13 @@ buttons:
     <<: *lang
     callback_data: 'en'
     text: 🇬🇧
+
+  more:
+    unique: more
+    text: '{{ text `btn_more` }}'
+  subscribe:
+    unique: subscribe
+    text: '{{ text `btn_subscribe` }}'
 
   link:
     unique: my_link
@@ -42,5 +52,9 @@ markups:
     - [lang_ru, lang_en]
   menu:
     - [my]
+  more:
+    - [more]
+  subscribe:
+    - [subscribe]
   delete:
     - [link_delete_confirm, link_delete_cancel]

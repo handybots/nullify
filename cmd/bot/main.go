@@ -71,6 +71,8 @@ func main() {
 	b.Handle("/start", h.OnStart)
 	b.Handle(tele.OnText, h.OnText)
 	b.Handle(lt.Callback("lang"), h.OnLang)
+	b.Handle(lt.Callback("more"), h.OnMore)
+	b.Handle(lt.Callback("subscribe"), h.OnSubscribe)
 	b.Handle(lt.Callback("link"), h.OnLink)
 	b.Handle(lt.Callback("link_delete"), h.OnLinkDelete)
 

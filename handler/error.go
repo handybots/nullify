@@ -7,5 +7,9 @@ import (
 )
 
 func (h handler) OnError(err error, c tele.Context) {
-	log.Println(c.Sender().Recipient(), err)
+	if c != nil {
+		log.Println(c.Sender().Recipient(), err)
+	} else {
+		log.Println(err)
+	}
 }

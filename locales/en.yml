@@ -21,6 +21,12 @@ limit: |-
 whence: |-
   Where did you get this link from? 🤔
 
+subscribe: |-
+  🤖 Subscribe to <b>@{{ config "subscribe" }}</b> channel to keep up with all the bot's news and more. Then you'll able to create an unlimited number of links!
+
+thanks: |-
+  ☺ Thank you! Now you have the full access to the bot.
+
 my: |-
   {{ range . }}
   <b>{{.Number}}.</b> {{ config "host" }}/{{.String}}
@@ -39,3 +45,5 @@ my_link: |-
 
 
 btn_my: My links
+btn_more: Want more!
+btn_subscribe: ✅ Check subscription

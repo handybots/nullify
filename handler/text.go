@@ -13,8 +13,16 @@ func (h handler) OnText(c tele.Context) error {
 		return err
 	}
 
-	if count >= h.lt.Int("limit") {
+	limits := h.lt.Get("limits")
+	if count >= limits.Int("subscribed") {
 		return c.Send(h.lt.Text(c, "limit"))
+	}
+
+	if !h.checkSubscription(c.Sender()) &&
+		count >= limits.Int("default") {
+		return c.Send(
+			h.lt.Text(c, "limit"),
+			h.lt.Markup(c, "more"))
 	}
 
 	var ent tele.MessageEntity

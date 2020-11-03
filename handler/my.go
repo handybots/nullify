@@ -30,14 +30,16 @@ func (h handler) OnMy(c tele.Context) error {
 		})
 	}
 
-	var btns []tele.Btn
-	for _, link := range xlinks {
-		btns = append(btns, *h.lt.Button(c, "link", link))
+	const maxInRow = 5
+	rows := make([]tele.Row, (len(links)-1)/maxInRow+1)
+	for i, link := range xlinks {
+		i /= maxInRow
+		rows[i] = append(rows[i], *h.lt.Button(c, "link", link))
 	}
 
 	menu := h.b.NewMarkup()
 	menu.ResizeKeyboard = true
-	menu.Inline(menu.Row(btns...))
+	menu.Inline(rows...)
 
 	if c.Callback() != nil {
 		return c.Edit(
