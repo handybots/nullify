@@ -67,4 +67,6 @@ gopkg.in/tucnak/telebot.v3 v3.0.0-20201103191919-41c95795c00f h1:CWTgUCfwmsQ7KvL
 gopkg.in/tucnak/telebot.v3 v3.0.0-20201103191919-41c95795c00f/go.mod h1:rQkLEeZ6z+UenbjlO1GjW24ZIZ6yJWqv92jcXpGpiR8=
 gopkg.in/tucnak/telebot.v3 v3.0.0-20201103201858-e467d6286c69 h1:897HfD6A09zEHye+GQ2cE2lLbtS/0LbjNBOwLzagLvU=
 gopkg.in/tucnak/telebot.v3 v3.0.0-20201103201858-e467d6286c69/go.mod h1:rQkLEeZ6z+UenbjlO1GjW24ZIZ6yJWqv92jcXpGpiR8=
+gopkg.in/tucnak/telebot.v3 v3.0.0-20201115234255-cdad4e4816f6 h1:8DBfwrlx8zj1Q6imS/qLMlGlGd+3vnIipW/aFjK4aFQ=
+gopkg.in/tucnak/telebot.v3 v3.0.0-20201115234255-cdad4e4816f6/go.mod h1:rQkLEeZ6z+UenbjlO1GjW24ZIZ6yJWqv92jcXpGpiR8=
 gopkg.in/yaml.v2 v2.2.2/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
