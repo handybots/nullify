@@ -5,8 +5,8 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/handybots/nullifybot/linkgen"
-	"github.com/handybots/nullifybot/storage"
+	"github.com/handybots/nullify/linkgen"
+	"github.com/handybots/nullify/storage"
 )
 
 type Server struct {

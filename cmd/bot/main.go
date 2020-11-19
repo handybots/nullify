@@ -11,9 +11,9 @@ import (
 	"gopkg.in/tucnak/telebot.v3/layout"
 	"gopkg.in/tucnak/telebot.v3/middleware"
 
-	"github.com/handybots/nullifybot/handler"
-	"github.com/handybots/nullifybot/server"
-	"github.com/handybots/nullifybot/storage"
+	"github.com/handybots/nullify/handler"
+	"github.com/handybots/nullify/server"
+	"github.com/handybots/nullify/storage"
 )
 
 func main() {

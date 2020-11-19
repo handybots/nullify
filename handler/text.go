@@ -3,7 +3,7 @@ package handler
 import (
 	"strings"
 
-	"github.com/handybots/nullifybot/storage"
+	"github.com/handybots/nullify/storage"
 	tele "gopkg.in/tucnak/telebot.v3"
 )
 

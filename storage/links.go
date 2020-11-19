@@ -3,7 +3,7 @@ package storage
 import (
 	"time"
 
-	"github.com/handybots/nullifybot/linkgen"
+	"github.com/handybots/nullify/linkgen"
 	"github.com/jmoiron/sqlx"
 )
 

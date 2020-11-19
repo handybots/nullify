@@ -1,4 +1,4 @@
-module github.com/handybots/nullifybot
+module github.com/handybots/nullify
 
 go 1.15
 
