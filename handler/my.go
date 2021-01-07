@@ -43,10 +43,12 @@ func (h handler) OnMy(c tele.Context) error {
 	if c.Callback() != nil {
 		return c.Edit(
 			h.lt.Text(c, "my", xlinks),
-			menu, tele.NoPreview)
+			menu, tele.NoPreview,
+		)
 	} else {
 		return c.Send(
 			h.lt.Text(c, "my", xlinks),
-			menu, tele.NoPreview)
+			menu, tele.NoPreview,
+		)
 	}
 }

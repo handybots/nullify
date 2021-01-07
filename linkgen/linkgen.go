@@ -3,7 +3,7 @@ package linkgen
 import "strings"
 
 const (
-	BucketSize     = 24 // 16 777 216
+	BucketSize     = 24 // 16 777 216
 	zeroWidthRune0 = '\u200c'
 	zeroWidthRune1 = '\u200d'
 )

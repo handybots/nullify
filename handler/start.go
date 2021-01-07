@@ -28,12 +28,14 @@ func (h handler) OnStart(c tele.Context) error {
 
 	defer c.Send(
 		h.lt.Text(c, "send"),
-		h.lt.Markup(c, "menu"))
+		h.lt.Markup(c, "menu"),
+	)
 
 	return c.Send(
 		h.lt.Text(c, "start", link.String()),
 		h.lt.Markup(c, "lang"),
-		tele.NoPreview)
+		tele.NoPreview,
+	)
 }
 
 func (h handler) OnLang(c tele.Context) error {

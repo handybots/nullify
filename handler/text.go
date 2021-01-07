@@ -22,7 +22,8 @@ func (h handler) OnText(c tele.Context) error {
 		!h.checkSubscription(c.Sender()) {
 		return c.Send(
 			h.lt.Text(c, "limit"),
-			h.lt.Markup(c, "more"))
+			h.lt.Markup(c, "more"),
+		)
 	}
 
 	var ent tele.MessageEntity
@@ -53,5 +54,6 @@ func (h handler) OnText(c tele.Context) error {
 
 	return c.Reply(
 		h.lt.Text(c, "created", link.String()),
-		tele.NoPreview)
+		tele.NoPreview,
+	)
 }

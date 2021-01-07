@@ -6,7 +6,8 @@ func (h handler) OnMore(c tele.Context) error {
 	return c.Edit(
 		h.lt.Text(c, "subscribe"),
 		h.lt.Markup(c, "subscribe"),
-		tele.NoPreview)
+		tele.NoPreview,
+	)
 }
 
 func (h handler) OnSubscribe(c tele.Context) error {

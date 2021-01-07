@@ -62,12 +62,12 @@ func main() {
 		DB:     db,
 	})
 
-	// Middleware
+	// Middleware.
 	b.OnError = h.OnError
 	b.Use(middleware.Logger(logger, h.LoggerFields))
 	b.Use(lt.Middleware("ru", h.LocaleFunc))
 
-	// Handlers
+	// Handlers.
 	b.Handle("/start", h.OnStart)
 	b.Handle(tele.OnText, h.OnText)
 	b.Handle(lt.Callback("lang"), h.OnLang)

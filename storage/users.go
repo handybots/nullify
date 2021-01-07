@@ -24,7 +24,7 @@ type (
 
 	User struct {
 		CreatedAt time.Time `sq:"created_at,omitempty"`
-		ID        int64     `db:"chat_id" sq:"chat_id,omitempty"`
+		ID        int64     `sq:"id,omitempty"`
 		Lang      string    `sq:"lang,omitempty"`
 		Blocked   bool      `sq:"blocked,omitempty"`
 	}

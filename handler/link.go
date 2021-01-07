@@ -24,8 +24,6 @@ func (h handler) OnLink(c tele.Context) error {
 		return c.Edit(h.lt.Text(c, "whence"))
 	}
 
-	// TODO: Get the link from cache.
-
 	link, err := h.db.Links.ByID(id)
 	if err != nil {
 		return err
@@ -45,7 +43,8 @@ func (h handler) OnLink(c tele.Context) error {
 	return c.Edit(
 		h.lt.Text(c, "my_link", xlink),
 		h.lt.Markup(c, "delete", link.ID),
-		tele.NoPreview)
+		tele.NoPreview,
+	)
 }
 
 func (h handler) OnLinkDelete(c tele.Context) error {
